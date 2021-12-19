@@ -47,7 +47,7 @@ If your cluster has RBAC enabled or you are running OpenShift you must authorize
 $ NS=$(kubectl config get-contexts|grep -e "^\*" |awk '{print $5}')
 $ NAMESPACE=${NS:-default}
 $ sed -i'' "s/namespace:.*/namespace: $NAMESPACE/g" ./deploy/rbac.yaml ./deploy/deployment.yaml
-$ kubectl create -f deploy/rbac.yaml
+$ kubectl create -f deploy/new-rbac.yaml
 ```
 
 **OpenShift:**
