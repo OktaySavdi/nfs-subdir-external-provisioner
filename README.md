@@ -58,9 +58,10 @@ On OpenShift the service account used to bind volumes does not have the necessar
 ```sh
 # Set the subject of the RBAC objects to the current namespace where the provisioner is being deployed
 $ NAMESPACE=`oc project -q`
-$ sed -i'' "s/namespace:.*/namespace: $NAMESPACE/g" ./deploy/rbac.yaml ./deploy/deployment.yaml
-$ oc create -f deploy/rbac.yaml
+$ sed -i'' "s/namespace:.*/namespace: $NAMESPACE/g" ./deploy/new-rbac.yaml ./deploy/deployment.yaml
+$ oc create -f deploy/new-rbac.yaml
 $ oc adm policy add-scc-to-user hostmount-anyuid system:serviceaccount:$NAMESPACE:nfs-client-provisioner
+$ oc adm policy add-cluster-role-to-user cluster-admin system:serviceaccount:nfs-dynamic-provider:nfs-client-provisioner
 ```
 
 **Step 4: Configure the NFS subdir external provisioner**
